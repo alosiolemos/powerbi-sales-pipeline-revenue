@@ -1,0 +1,9 @@
+**/.pbi/
+*.pbix
+*.pbit
+*.pbip
+*.abf
+.env
+.env.*
+!.env.example
+*.zip

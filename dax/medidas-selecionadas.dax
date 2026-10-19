@@ -1,0 +1,25 @@
+// Expressões selecionadas do projeto; identificadores de pipeline substituídos.
+// Copie uma medida por vez, somente em modelo com tabelas e relacionamentos compatíveis.
+
+Qtd | Diagnósticos Realizados =
+CALCULATE(
+    CALCULATE(
+        COUNT('hs_Negócios'[id]),
+        'hs_Negócios'[pipeline] IN {"<PIPELINE_A>", "<PIPELINE_B>"},
+        'hs_Negócios'[data_do_diagnostico] <> BLANK()
+    ),
+    USERELATIONSHIP(dCalendario[Date], 'hs_Negócios'[data_do_diagnostico])
+) + 0
+
+Qtd | Contratos Assinados =
+CALCULATE(
+    CALCULATE(
+        COUNT('hs_Negócios'[id]),
+        'hs_Negócios'[pipeline] IN {"<PIPELINE_A>", "<PIPELINE_B>"},
+        'hs_Negócios'[data_de_contrato_assinado] <> BLANK()
+    ),
+    USERELATIONSHIP(dCalendario[Date], 'hs_Negócios'[data_de_contrato_assinado])
+) + 0
+
+TX.CV | Realizado x Assinado =
+DIVIDE([Qtd | Contratos Assinados], [Qtd | Diagnósticos Realizados], 0)
