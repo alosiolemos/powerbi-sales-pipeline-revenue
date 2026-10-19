@@ -1,25 +1,226 @@
-// Expressões selecionadas do projeto; identificadores de pipeline substituídos.
-// Copie uma medida por vez, somente em modelo com tabelas e relacionamentos compatíveis.
+// Seleção de 33 medidas do projeto; não é o modelo completo.
+// Pipelines e etapa interna substituídos por marcadores distintos.
+// Copie uma expressão por vez no modelo compatível; não é um script DAX executável em lote.
+
+// ============================================================
+// Volume comercial
+// ============================================================
+
+Qtd | Diagnósticos Agendados =
+CALCULATE(
+    CALCULATE(
+        COUNT('hs_Negócios'[id]),
+        'hs_Negócios'[pipeline] in {"<PIPELINE_A>","<PIPELINE_B>"}))+0
 
 Qtd | Diagnósticos Realizados =
 CALCULATE(
     CALCULATE(
         COUNT('hs_Negócios'[id]),
-        'hs_Negócios'[pipeline] IN {"<PIPELINE_A>", "<PIPELINE_B>"},
-        'hs_Negócios'[data_do_diagnostico] <> BLANK()
-    ),
-    USERELATIONSHIP(dCalendario[Date], 'hs_Negócios'[data_do_diagnostico])
-) + 0
+        'hs_Negócios'[pipeline]in {"<PIPELINE_A>","<PIPELINE_B>"},
+        'hs_Negócios'[data_do_diagnostico]<>BLANK()),
+    USERELATIONSHIP(dCalendario[Date],'hs_Negócios'[data_do_diagnostico]))+0
+
+Qtd | Propostas Apresentadas =
+CALCULATE(
+    CALCULATE(
+        COUNT('hs_Negócios'[id]),
+        'hs_Negócios'[pipeline]in {"<PIPELINE_A>","<PIPELINE_B>"},
+        'hs_Negócios'[data_da_apresentacao_de_proposta]<>BLANK()),
+    USERELATIONSHIP(dCalendario[Date],'hs_Negócios'[data_da_apresentacao_de_proposta]))+0
+
+Qtd | Negociação de Contrato =
+CALCULATE(
+    CALCULATE(
+        COUNT('hs_Negócios'[id]),
+        'hs_Negócios'[pipeline]in {"<PIPELINE_A>","<PIPELINE_B>"},
+        'hs_Negócios'[data_do_aceite_formal]<>BLANK()),
+    USERELATIONSHIP(dCalendario[Date],'hs_Negócios'[data_do_aceite_formal]))+0
+
+Qtd | Contratos Enviados =
+CALCULATE(
+    CALCULATE(
+        COUNT('hs_Negócios'[id]),
+        'hs_Negócios'[pipeline]in {"<PIPELINE_A>","<PIPELINE_B>"},
+        'hs_Negócios'[data_de_contrato_enviado]<>BLANK()),
+    USERELATIONSHIP(dCalendario[Date],'hs_Negócios'[data_de_contrato_enviado]))+0
 
 Qtd | Contratos Assinados =
 CALCULATE(
     CALCULATE(
         COUNT('hs_Negócios'[id]),
-        'hs_Negócios'[pipeline] IN {"<PIPELINE_A>", "<PIPELINE_B>"},
-        'hs_Negócios'[data_de_contrato_assinado] <> BLANK()
-    ),
-    USERELATIONSHIP(dCalendario[Date], 'hs_Negócios'[data_de_contrato_assinado])
-) + 0
+        'hs_Negócios'[pipeline]in {"<PIPELINE_A>","<PIPELINE_B>"},
+        'hs_Negócios'[data_de_contrato_assinado]<>BLANK())
+    ,USERELATIONSHIP(dCalendario[Date],'hs_Negócios'[data_de_contrato_assinado]))+0
+
+Qtd | Contratos Pagos =
+CALCULATE(
+    CALCULATE(
+        COUNT('hs_Negócios'[id]),
+        'hs_Negócios'[pipeline]in {"<PIPELINE_A>","<PIPELINE_B>"},
+        'hs_Negócios'[data_do_pagamento_efetuado]<>BLANK()),USERELATIONSHIP(dCalendario[Date],'hs_Negócios'[data_do_pagamento_efetuado]))+0
+
+Qtd | Contratos Faturamentos =
+CALCULATE(
+    CALCULATE(
+        COUNT(hs_Contas[id]),
+        hs_Contas[hs_pipeline]="<PIPELINE_CONTAS>",
+        hs_Contas[tipo_de_contrato]="Novo Contrato",
+        hs_Contas[data_de_faturamento_concluido]<>BLANK()),
+    USERELATIONSHIP(dCalendario[Date],hs_Contas[data_de_faturamento_concluido]))+0
+
+// ============================================================
+// Valores e receita
+// ============================================================
+
+R$ | Propostas Apresentadas =
+CALCULATE(
+    CALCULATE(
+        SUM('hs_Negócios'[amount_v2]),
+        'hs_Negócios'[pipeline]in {"<PIPELINE_A>","<PIPELINE_B>"},
+        'hs_Negócios'[data_da_apresentacao_de_proposta]<>BLANK()),
+    USERELATIONSHIP(dCalendario[Date],'hs_Negócios'[data_da_apresentacao_de_proposta]))+0
+
+R$ | Negociação de Contrato =
+CALCULATE(
+    CALCULATE(
+        SUM('hs_Negócios'[amount_v2]),
+        'hs_Negócios'[pipeline]in {"<PIPELINE_A>","<PIPELINE_B>"},
+        'hs_Negócios'[data_do_aceite_formal]<>BLANK()),
+    USERELATIONSHIP(dCalendario[Date],'hs_Negócios'[data_do_aceite_formal]))+0
+
+R$ | Contratos Enviados =
+CALCULATE(
+    CALCULATE(
+        SUM('hs_Negócios'[amount_v2]),
+        'hs_Negócios'[pipeline]in {"<PIPELINE_A>","<PIPELINE_B>"},
+        'hs_Negócios'[data_de_contrato_enviado]<>BLANK()),
+    USERELATIONSHIP(dCalendario[Date],'hs_Negócios'[data_de_contrato_enviado]))+0
+
+R$ | Contratos Assinados =
+CALCULATE(
+    CALCULATE(
+        SUM('hs_Negócios'[amount_v2]),
+        'hs_Negócios'[pipeline]in {"<PIPELINE_A>","<PIPELINE_B>"},
+        'hs_Negócios'[data_de_contrato_assinado]<>BLANK())
+    ,USERELATIONSHIP(dCalendario[Date],'hs_Negócios'[data_de_contrato_assinado]))+0
+
+R$ | Contratos Faturamentos =
+CALCULATE(
+    CALCULATE(
+        SUM(hs_Contas[valor]),
+        hs_Contas[hs_pipeline]in {"<PIPELINE_CONTAS>"},
+        hs_Contas[tipo_de_contrato]="Novo Contrato",
+        hs_Contas[data_de_faturamento_concluido]<>BLANK()),
+    USERELATIONSHIP(dCalendario[Date],hs_Contas  [data_de_faturamento_concluido]))+0
+
+R$ | Contratos Pagos =
+CALCULATE(
+    CALCULATE(
+        SUM('hs_Negócios'[amount_v2]),
+        'hs_Negócios'[pipeline]in {"<PIPELINE_A>","<PIPELINE_B>"},
+        'hs_Negócios'[data_do_pagamento_efetuado]<>BLANK()),
+    USERELATIONSHIP(dCalendario[Date], 'hs_Negócios'[data_do_pagamento_efetuado]))+0
+
+// ============================================================
+// Ticket médio
+// ============================================================
+
+AVG | Propostas Apresentadas =
+DIVIDE([R$ | Propostas Apresentadas],[Qtd | Propostas Apresentadas],0)
+
+AVG | Negociação de Contrato =
+DIVIDE([R$ | Negociação de Contrato],[Qtd | Negociação de Contrato],0)
+
+AVG | Contrato Enviado =
+DIVIDE([R$ | Contratos Enviados],[Qtd | Contratos Enviados],0)
+
+AVG | Contrato Assinado =
+DIVIDE([R$ | Contratos Assinados],[Qtd | Contratos Assinados],0)
+
+AVG | Faturamentos =
+DIVIDE([R$ | Contratos Faturamentos],[Qtd | Contratos Faturamentos],0)
+
+AVG | Pagamentos =
+DIVIDE([R$ | Contratos Pagos],[Qtd | Contratos Pagos],0)
+
+// ============================================================
+// Conversão
+// ============================================================
+
+TX.CV | Realizado x Negociação de Contrato =
+DIVIDE([Qtd | Negociação de Contrato],[Qtd | Diagnósticos Realizados],0)
 
 TX.CV | Realizado x Assinado =
-DIVIDE([Qtd | Contratos Assinados], [Qtd | Diagnósticos Realizados], 0)
+DIVIDE([Qtd | Contratos Assinados],[Qtd | Diagnósticos Realizados],0)
+
+// ============================================================
+// Carteira e acompanhamento
+// ============================================================
+
+Qtd | Novos Clientes da Carteira =
+CALCULATE(
+    COUNT(hs_Contas[id]),
+    hs_Contas[hs_pipeline_stage]="<ETAPA_NOVO_CLIENTE>")+0
+
+Dias Abero AVG Stpo S/Atv30D =
+CALCULATE(
+    COUNT('hs_Negócios'[id]),
+    'hs_Negócios'[Atividades Ult. 30D]="Não",
+    'hs_Negócios'[Dealstage-Hub]in{"Aceite formal","Demo + Compromisso","Diagnóstico","Oportunidade","Proposta apresentada","Contrato enviado"})
+
+Qtd | Negócios Parados =
+CALCULATE(
+    COUNT('hs_Negócios'[id]),
+    'hs_Negócios'[Dealstage-Hub]in{"Aceite formal","Demo + Compromisso","Diagnóstico","Oportunidade","Proposta apresentada","Contrato enviado","Realização da POC"},
+    'hs_Negócios'[pipeline]in {"<PIPELINE_A>","<PIPELINE_B>"})
+
+// ============================================================
+// Período, perdas e valores em aberto
+// ============================================================
+
+Qtd Período | Diagnósticos Realizados =
+CALCULATE(
+    COUNT('hs_Negócios'[id]),
+    'hs_Negócios'[pipeline]in {"<PIPELINE_A>","<PIPELINE_B>"},
+    'hs_Negócios'[data_do_diagnostico]<>BLANK())+0
+
+Qtd Período | Contratos Assinados =
+CALCULATE(
+    COUNT('hs_Negócios'[id]),
+    'hs_Negócios'[pipeline]in {"<PIPELINE_A>","<PIPELINE_B>"},
+    'hs_Negócios'[data_de_contrato_assinado]<>BLANK())+0
+
+Qtd Período | Motivos de Perda =
+CALCULATE(
+    COUNT('hs_Negócios'[id]),
+    'hs_Negócios'[pipeline]in {"<PIPELINE_A>","<PIPELINE_B>"},
+    'hs_Negócios'[Dealstage-Hub]="Negócio perdido")+0
+
+R$ | Período Negócios Parados na Mesa =
+([R$ Período_Etapa | Proposta]+
+    [R$ Período_Etapa | Negociação de Contrato]+
+    [R$ Período_Etapa | Contrato Enviado])+0
+
+R$ Período | Motivos de Perda =
+CALCULATE(
+    SUM('hs_Negócios'[amount_v2]),
+    'hs_Negócios'[pipeline]in {"<PIPELINE_A>","<PIPELINE_B>"},
+    'hs_Negócios'[Dealstage-Hub]="Negócio perdido")+0
+
+R$ Período_Etapa | Proposta =
+CALCULATE(
+    SUM('hs_Negócios'[amount_v2]),
+    'hs_Negócios'[pipeline] in {"<PIPELINE_A>"},
+    'hs_Negócios'[Dealstage-Hub]="Proposta apresentada")+0
+
+R$ Período_Etapa | Negociação de Contrato =
+CALCULATE(
+    SUM('hs_Negócios'[amount_v2]),
+    'hs_Negócios'[pipeline]in {"<PIPELINE_A>","<PIPELINE_B>"},
+    'hs_Negócios'[Dealstage-Hub]="Negociação de Contrato")+0
+
+R$ Período_Etapa | Contrato Enviado =
+CALCULATE(
+    SUM('hs_Negócios'[amount_v2]),
+    'hs_Negócios'[pipeline]in {"<PIPELINE_A>","<PIPELINE_B>"},
+    'hs_Negócios'[Dealstage-Hub]="Contrato Enviado")+0

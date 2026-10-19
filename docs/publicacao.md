@@ -6,7 +6,7 @@ Este repositório contém documentação e exemplos selecionados, não uma cópi
 
 - Contexto e fluxo comercial.
 - Diagramas e inventário dos relacionamentos.
-- Três medidas DAX com pipelines substituídos.
+- 33 medidas DAX com identificadores internos substituídos.
 - Exemplos M adaptados e demonstração com dados fictícios.
 - Orientações para capturas revisadas.
 

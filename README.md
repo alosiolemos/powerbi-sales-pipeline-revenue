@@ -46,6 +46,7 @@ Negócios e contas são frentes analíticas distintas. O inventário de relaçõ
 - [Inventário dos 24 relacionamentos](docs/inventario-relacionamentos.md)
 - [Integração HubSpot: funções, loop e aplicação](docs/integracao-hubspot.md)
 - [Indicadores e medidas DAX selecionadas](docs/indicadores-dax.md)
+- [Catálogo de 33 medidas: vendas, faturamento e acompanhamento](docs/catalogo-medidas.md)
 - [Seletores de indicadores e períodos](docs/interatividade.md)
 - [Capturas do painel](assets/screenshots/README.md)
 
@@ -61,6 +62,21 @@ DIVIDE(
 ```
 
 A medida compara os totais no contexto de filtros. Como as etapas usam datas diferentes, essa razão por período não deve ser interpretada automaticamente como conversão de uma mesma coorte de negócios.
+
+## Indicadores além do funil
+
+A seleção pública foi ampliada para **33 medidas**, organizadas em seis grupos:
+
+| Grupo | Exemplos |
+| --- | --- |
+| Volume comercial | Diagnósticos, propostas, contratos assinados e pagos |
+| Valores e receita | Valores propostos, assinados, faturados e associados a negócios pagos |
+| Ticket médio | Propostas, negociação, assinatura, faturamento e pagamento |
+| Conversão | Diagnóstico para negociação e assinatura |
+| Carteira e acompanhamento | Contas em etapa de novos clientes e negócios sem atividade |
+| Período e perdas | Quantidade e valor perdidos, valores por etapa e negócios na mesa |
+
+O [guia de indicadores](docs/indicadores-dax.md) explica as diferenças entre assinatura, faturamento e pagamento. O [catálogo](docs/catalogo-medidas.md) descreve cada expressão, inclusive quando o nome histórico não representa exatamente o cálculo.
 
 ## Integração com HubSpot
 
