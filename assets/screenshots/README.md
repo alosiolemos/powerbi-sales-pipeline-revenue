@@ -15,4 +15,4 @@ Depois do envio das imagens, o README principal poderá incorporá-las. Não há
 
 <img width="1457" height="787" alt="01-visao-receita png" src="https://github.com/user-attachments/assets/f5ccded4-0a15-454a-b9f0-103f09a566e7" />
 
-<img width="5847" height="3444" alt="02-funil-comercial" src="https://github.com/user-attachments/assets/b401ef05-42fd-44bd-9546-0aa539bfb79c" />
+<img width="1372" height="785" alt="02-funil-comercial" src="https://github.com/user-attachments/assets/4825d2d5-aefa-405c-800f-a947bb9e3511" />
