@@ -38,4 +38,4 @@ Nas consultas foram observadas expansão de registros JSON, conversão de datas 
 
 Criação, diagnóstico, assinatura, faturamento e pagamento são eventos diferentes. O mesmo mês pode reunir eventos de negócios criados em outros períodos. Análises de fluxo por período e análises de coorte exigem regras distintas.
 
-Os resultados financeiros visíveis nas imagens originais não são utilizados como indicadores públicos de desempenho do autor.
+Os resultados financeiros visíveis nas imagens originais não são utilizados como indicadores públicos do meu desempenho.
