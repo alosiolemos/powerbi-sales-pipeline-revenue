@@ -90,7 +90,7 @@ As capturas de referência orientaram a descrição funcional. A publicação da
 
 ## Participação e contexto
 
-O autor descreveu a construção do painel para a gestão comercial e apresentou a integração com HubSpot como parte da solução desenvolvida. O mapeamento técnico desta edição foi realizado sobre os arquivos PBIP fornecidos. Não são atribuídos ganhos de receita ou produtividade sem evidência específica.
+Desenvolvi o painel para a gestão comercial, com integração ao HubSpot como parte da solução. A documentação técnica desta versão foi baseada nos arquivos PBIP do projeto. Não atribuo ganhos de receita ou produtividade sem evidência específica.
 
 ## Escopo público
 
