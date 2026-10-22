@@ -86,7 +86,11 @@ O portfólio inclui uma [reconstrução didática parametrizada](power-query/REA
 
 ## Telas
 
-As capturas de referência orientaram a descrição funcional. A publicação das imagens aguarda uma versão com dados fictícios e identidade visual adaptada. Nenhuma captura original foi copiada para esta edição.
+Capturas do painel desenvolvido, disponibilizadas para apresentar a experiência visual do projeto.
+
+<img width="1457" height="787" alt="01-visao-receita png" src="https://github.com/user-attachments/assets/f5ccded4-0a15-454a-b9f0-103f09a566e7" />
+
+<img width="1372" height="785" alt="02-funil-comercial" src="https://github.com/user-attachments/assets/4825d2d5-aefa-405c-800f-a947bb9e3511" />
 
 ## Participação e contexto
 
